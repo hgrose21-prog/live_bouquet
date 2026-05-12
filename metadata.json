@@ -1,0 +1,12 @@
+{
+  "name": "라이브부케 (Live Bouquet)",
+  "description": "AI 기반 식물 식별, 맞춤형 관리 가이드, 식물 기록 및 중고 거래 플랫폼",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "AI 식물 식별",
+    "성장 일기",
+    "커뮤니티 및 거래"
+  ]
+}
