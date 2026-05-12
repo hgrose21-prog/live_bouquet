@@ -10,9 +10,6 @@
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
 }
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 

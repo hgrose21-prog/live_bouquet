@@ -77,6 +77,10 @@ export default function App() {
             alt="Live Bouquet Logo" 
             className="h-10 w-auto object-contain"
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://raw.githubusercontent.com/lucide-react/lucide/main/icons/leaf.svg';
+              (e.target as HTMLImageElement).className = 'h-8 w-8 text-emerald-600';
+            }}
           />
           <div>
             <h1 className="font-bold text-lg tracking-tight text-emerald-800 leading-none">라이브부케</h1>
