@@ -14,8 +14,14 @@ export async function identifyPlant(imageBase64: string) {
   if (!ai) throw new Error("AI service not configured. Please set GEMINI_API_KEY.");
 
   const model = "gemini-3-flash-preview";
-  const prompt = `Identify this plant and provide its common name, scientific name, and basic care requirements (watering frequency, light needs, humidity). 
-  Also analyze its current health from the image. 
+  const prompt = `Identify this plant and provide its common name, scientific name, and specific care requirements.
+  Include:
+  1. wateringFrequency: average days between watering (number only)
+  2. wateringInfo: detailed how-to water.
+  3. lightNeeds: direct, indirect, shade, etc.
+  4. humidity: preference.
+  5. healthAnalysis: overall state.
+  6. careTips: list of 3 actionable advice.
   Respond in JSON format.`;
 
   const response = await ai.models.generateContent({
@@ -33,13 +39,14 @@ export async function identifyPlant(imageBase64: string) {
         properties: {
           commonName: { type: Type.STRING },
           scientificName: { type: Type.STRING },
+          wateringFrequency: { type: Type.NUMBER },
           wateringInfo: { type: Type.STRING },
           lightNeeds: { type: Type.STRING },
           humidity: { type: Type.STRING },
           healthAnalysis: { type: Type.STRING },
           careTips: { type: Type.ARRAY, items: { type: Type.STRING } }
         },
-        required: ["commonName", "scientificName", "healthAnalysis"]
+        required: ["commonName", "scientificName", "healthAnalysis", "wateringFrequency"]
       }
     }
   });

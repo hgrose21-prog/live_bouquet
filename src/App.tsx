@@ -48,10 +48,18 @@ export default function App() {
   useEffect(() => {
     // Load plants from localStorage or mock
     const savedPlants = localStorage.getItem('green_keeper_plants');
+    let loadedPlants = [];
     if (savedPlants) {
-      setPlants(JSON.parse(savedPlants));
+      loadedPlants = JSON.parse(savedPlants);
+      setPlants(loadedPlants);
     } else {
-      setPlants(MOCK_PLANTS);
+      loadedPlants = MOCK_PLANTS;
+      setPlants(loadedPlants);
+    }
+
+    // Induce photo taking if no plants (ignoring mock for this logic if empty)
+    if (loadedPlants.length === 0) {
+      setActiveTab('ai');
     }
 
     // Load weather
@@ -63,7 +71,8 @@ export default function App() {
   }, [plants]);
 
   const addPlant = (newPlant: Plant) => {
-    setPlants([...plants, newPlant]);
+    setPlants((prev) => [...prev, newPlant]);
+    setActiveTab('plants'); // Auto-switch to list after adding
     toast.success(`${newPlant.name}이(가) 등록되었습니다!`);
   };
 

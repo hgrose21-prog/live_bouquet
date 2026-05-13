@@ -50,9 +50,10 @@ export default function AIAnalysis({ onAddPlant }: { onAddPlant: (plant: Plant) 
       image: image,
       acquisitionDate: new Date().toISOString().split('T')[0],
       lastWatered: new Date().toISOString().split('T')[0],
-      wateringFrequency: 7, // Default
+      wateringFrequency: result.wateringFrequency || 7,
       healthStatus: 'healthy',
       location: '거실',
+      notes: result.careTips?.join('\n')
     };
     
     onAddPlant(newPlant);
